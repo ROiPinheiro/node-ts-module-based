@@ -1,7 +1,16 @@
-import { Request, Response } from 'express';
+export interface HttpRequest<Body = any, Params = any, Headers = any> {
+  body: Body;
+  params: Params;
+  headers: Headers;
+}
+
+export interface HttpResponse<Body = any> {
+  payload: Body;
+  statusCode: number;
+}
 
 export interface Controller {
-  handle: (req: Request, res: Response) => Promise<Response>;
+  handle: (httpRequest: HttpRequest) => Promise<HttpResponse>;
 }
 
 export interface Project {
